@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: navi.navigationRules.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: navi.navigationRules.ide
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: navi.navigationRules.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: navi.navigationRules,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Export-Package: navi.ide.contentassist.antlr,
+ navi.ide.contentassist.antlr.internal

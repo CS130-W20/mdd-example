@@ -1,0 +1,56 @@
+navigation rules for MyApplication
+
+mappings {
+ map permission AdminPermission to "privAdmin"
+ map permission DataAccessPermission to "privData"
+
+ map coordinate Login to "myapp.gui.login.LoginController"  
+                      in "myapp.login"
+ map coordinate LoginFailed to "myapp.gui.login.LoginFailedController" 
+                            in "myapp.login"
+ map coordinate MainMenu to "myapp.gui.menu.MainMenuController"  
+                         in "myapp.menu"
+ map coordinate UserAdministration to "myapp.gui.admin.UserAdministration" 
+                                   in "myapp.admin"
+ map coordinate DataLookup to "myapp.gui.lookup.LookupControlle"  
+                           in "myapp.lookup"
+}
+
+navigations {
+ define navigation USER_LOGON_FAILED
+ define navigation USER_LOGON_SUCCESS
+ define navigation OK
+ define navigation BACK
+ define navigation ADMIN
+ define navigation DATA_LOOKUP
+}
+
+navrules {
+ from Login
+  on navigation USER_LOGON_FAILED
+   go to LoginFailed
+  on navigation USER_LOGON_SUCCESS
+   go to MainMenu
+
+ from LoginFailed
+  on navigation OK
+   go to Login
+
+ from MainMenu
+  on navigation ADMIN
+   go to UserAdministration
+   with AdminPermission
+  on navigation DATA_LOOKUP
+   go to DataLookup
+   with DataAccessPermission
+  
+ from UserAdministration
+  on navigation BACK
+   go to MainMenu
+
+ from DataLookup
+  on navigation BACK
+   go to MainMenu
+
+}
+

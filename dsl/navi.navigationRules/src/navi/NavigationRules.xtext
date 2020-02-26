@@ -1,0 +1,51 @@
+grammar navi.NavigationRules with org.eclipse.xtext.common.Terminals
+
+generate navigationRules "http://www.NavigationRules.navi"
+
+Root:
+ 'navigation' 'rules' 'for' name=ID
+ 	mappingsdefs=Mappings
+ 	transitiondefs=TransitionDefinitions
+ 	ruledefs=NavigationRules;
+
+Mappings:
+ 'mappings' '{'
+ 	(mappings+=Mapping)+
+ '}';
+
+Mapping:
+ 'map' MappingSpec;
+
+MappingSpec:
+ PermissionMappingSpec | CoordinateMappingSpec;
+
+PermissionMappingSpec:
+ 'permission' name=ID 'to' value=STRING;
+
+CoordinateMappingSpec:
+ 'coordinate' name=ID 'to' controllername=STRING 'in' bundleid=STRING;
+
+TransitionDefinitions:
+ 'navigations' '{'
+ 	(transitions+=TransitionDefinition)+ 
+ '}';
+
+TransitionDefinition:
+ 'define' 'navigation' name=ID;
+
+NavigationRules:
+ 'navrules' '{'
+ 	(rules+=Rule)+
+ '}';
+
+Rule:
+ 'from' source=[CoordinateMappingSpec|ID]
+ 	(destinations+=Destination)+;
+
+Destination:
+ 'on' 'navigation' transition=[TransitionDefinition|ID]
+ 	'go' 'to' target=[CoordinateMappingSpec|ID]
+	 	(permissions+=PermissionReference)*;
+
+PermissionReference:
+ 'with' permission=[PermissionMappingSpec|ID];
