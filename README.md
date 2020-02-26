@@ -10,7 +10,7 @@ The ```dsl``` folder contains Xtext projects that define the NavigationRules DS:
 
 You can import the projects in your Eclipse dev workspace using the File->Import->General->Existing Projects into Workspace.
 
-## Example
+## The Example
 
 The ```example``` folder contains the example project with the MyApplication.navirules model (in src), and its generated MyApplicationRules.java (in src-gen) generated Java code.
 
