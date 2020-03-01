@@ -4,12 +4,12 @@
 package navi.generator
 
 import navi.navigationRules.Destination
-import navi.navigationRules.Root
 import navi.navigationRules.Rule
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
+import navi.navigationRules.Root
 
 /**
  * Generates code from your model files on save.
@@ -37,6 +37,7 @@ class NavigationRulesGenerator extends AbstractGenerator {
 				NaviDestination nv;
 				«FOR rule : root?.ruledefs.rules»
 					«FOR dest : rule.destinations»
+					
 
 					«rule.toCode(dest)»
   				«ENDFOR»

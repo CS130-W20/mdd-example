@@ -3,6 +3,11 @@
  */
 package navi.validation;
 
+import org.eclipse.xtext.validation.Check;
+
+import navi.navigationRules.Destination;
+import navi.navigationRules.NavigationRulesPackage;
+import navi.navigationRules.Rule;
 
 /**
  * This class contains custom validation rules. 
@@ -11,15 +16,16 @@ package navi.validation;
  */
 public class NavigationRulesValidator extends AbstractNavigationRulesValidator {
 	
-//	public static final INVALID_NAME = 'invalidName'
-//
-//	@Check
-//	public void checkGreetingStartsWithCapital(Greeting greeting) {
-//		if (!Character.isUpperCase(greeting.getName().charAt(0))) {
-//			warning("Name should start with a capital",
-//					NavigationRulesPackage.Literals.GREETING__NAME,
-//					INVALID_NAME);
-//		}
-//	}
+	public static final String SELF_TRANSITION = "selfTransition";
+
+	@Check
+	public void checkGreetingStartsWithCapital(Destination destination) {
+		Rule rule  = (Rule) destination.eContainer();
+		if (destination.getTarget().equals(rule.getSource())) {
+			error("Self transitions are not allowed", // this is the error message
+					NavigationRulesPackage.Literals.DESTINATION__TARGET, // this is the feature to highlight with a problem
+					SELF_TRANSITION); // this is an error code
+		}
+	}
 	
 }

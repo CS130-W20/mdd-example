@@ -72,6 +72,8 @@ public class NavigationRulesGenerator extends AbstractGenerator {
         {
           EList<Destination> _destinations = rule.getDestinations();
           for(final Destination dest : _destinations) {
+            _builder.append("\t\t");
+            _builder.newLine();
             _builder.newLine();
             _builder.append("\t\t");
             String _code = this.toCode(rule, dest);
